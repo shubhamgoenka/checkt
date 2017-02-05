@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "097C0B85055C0599490DD3A44FB4549079E8B20C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "097C0B85055C0599490DD3A44FB4549079E8B20C" : 9223372036854775807,
+    "20E9E037F06F7043CFA9FDAE7777590D3E0B7D9A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A1AB7EDB-1398-4B0D-B239-A6D6E0C30B9E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "097C0B85055C0599490DD3A44FB4549079E8B20C" : "Checkt\/",
+    "20E9E037F06F7043CFA9FDAE7777590D3E0B7D9A" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Checkt",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Checkt.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eliot1019\/Checkt.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "097C0B85055C0599490DD3A44FB4549079E8B20C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jessxcachen\/MobileDevs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "20E9E037F06F7043CFA9FDAE7777590D3E0B7D9A"
+    }
+  ]
+}

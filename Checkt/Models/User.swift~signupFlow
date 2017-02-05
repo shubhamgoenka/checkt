@@ -1,0 +1,114 @@
+//
+//  User.swift
+//  Checkt
+//
+//  Created by Shubham Goenka on 12/11/16.
+//  Copyright © 2016 Eliot Han. All rights reserved.
+//
+
+import Foundation
+import Firebase
+
+
+enum loginStatus {
+    case loggedIn
+    case loggedOut
+}
+
+
+class User {
+    
+    var uid: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
+    var userImageUrl: String = ""
+    var groupIds: [String] = []
+    var pinnedEvents: [String] = []
+    var pastEvents: [String] = []
+    
+    
+    init (key: String, userDict: [String: AnyObject]) {
+        uid = key
+        if let first = userDict["firstName"] as? String {
+            firstName = first
+        }
+        if let last = userDict["lastName"] as? String {
+            lastName = last
+        }
+        if let emailID = userDict["email"] as? String {
+            email = emailID
+        }
+        if let profPicUrl = userDict["userImageUrl"] as? String {
+            userImageUrl = profPicUrl
+        }
+        if let groups = (userDict["groupIds"] as? [String]) {
+            groupIds = groups
+        }
+        if let pinned = (userDict["pinnedEvents"] as? [String]) {
+            pinnedEvents = pinned
+        }
+        if let past = (userDict["pastEvents"] as? [String]) {
+            pastEvents = past
+        }
+    }
+    
+    func getUserImage(withBlock: @escaping (UIImage) -> Void) {
+        let imageRef = Constants.storageRef.child(userImageUrl)
+        imageRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) in
+            if error != nil {
+                print("An error occured while retrieving user image: \(error)")
+            } else {
+                let image = UIImage(data: data!)
+                withBlock(image!)
+            }
+        }
+    }
+    
+    func pollForPinnedEvents(withBlock: @escaping (Event) -> Void) {
+        for _ in pinnedEvents {
+            Constants.dbRef.observe(.value, with: { snapshot in
+                if snapshot.exists() {
+                    if let eventDict = snapshot.value as? [String: AnyObject] {
+                        let retrievedEvent = Event(key: snapshot.key, eventDict: eventDict)
+                        withBlock(retrievedEvent)
+                    }
+                } else {
+                    print("Cannot access event pinned by user")
+                }
+            })
+        }
+    }
+    
+    func pollForPastEvents(withBlock: @escaping (Event) -> Void) {
+        for _ in pastEvents {
+            Constants.dbRef.observe(.value, with: { snapshot in
+                if snapshot.exists() {
+                    if let eventDict = snapshot.value as? [String: AnyObject] {
+                        let retrievedEvent = Event(key: snapshot.key, eventDict: eventDict)
+                        withBlock(retrievedEvent)
+                    }
+                } else {
+                    print("Cannot access past event")
+                }
+            })
+        }
+    }
+    
+    func pollForGroups(withBlock: @escaping (Group) -> Void) {
+        for _ in groupIds {
+            Constants.dbRef.observe(.value, with: { snapshot in
+                if snapshot.exists() {
+                    if let groupDict = snapshot.value as? [String: AnyObject] {
+                        let retrievedGroup = Group(key: snapshot.key, groupDict: groupDict)
+                        withBlock(retrievedGroup)
+                    }
+                } else {
+                    print("Cannot access group user belongs to")
+                }
+            })
+        }
+    }
+    
+}
+
